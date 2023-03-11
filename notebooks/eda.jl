@@ -26,6 +26,15 @@ describe(train)
 # ╔═╡ 07a32f8b-0d2e-4010-be10-a525b1349b8c
 describe(test)
 
+# ╔═╡ 5b6ec448-09b1-47c2-8e45-39ad3506d253
+begin
+	@chain label begin
+		@group_by(status_group)
+		@summarize(count = nrow())
+	end
+end
+
+
 # ╔═╡ 693caadd-0459-46fa-bfe4-616607d4c49b
 begin
 	@chain train begin
@@ -1091,6 +1100,7 @@ version = "1.4.1+0"
 # ╠═92e5479b-3e42-41b3-b77c-499d7e03a243
 # ╠═8f5709be-2983-49ab-a910-ab568f964b47
 # ╠═07a32f8b-0d2e-4010-be10-a525b1349b8c
+# ╠═5b6ec448-09b1-47c2-8e45-39ad3506d253
 # ╠═693caadd-0459-46fa-bfe4-616607d4c49b
 # ╠═47cfaefb-2fbd-4c6a-8ddf-5724181f961d
 # ╟─00000000-0000-0000-0000-000000000001

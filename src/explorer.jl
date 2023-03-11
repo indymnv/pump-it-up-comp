@@ -31,6 +31,11 @@ end
 	@summarize(n =missing())
 end
 
+@chain label begin
+	@group_by(status_group)
+	@summarize(count = nrow())
+end
+
 @chain train, label begin
 	@left_join(train, label)
 	@group_by(train.funder)
