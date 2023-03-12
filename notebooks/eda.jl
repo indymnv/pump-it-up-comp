@@ -10,6 +10,7 @@ begin
 	using Plots
 	using Statistics
 	using CSV
+	using DataFrames
 end
 
 # ╔═╡ 92e5479b-3e42-41b3-b77c-499d7e03a243
@@ -26,6 +27,11 @@ describe(train)
 # ╔═╡ 07a32f8b-0d2e-4010-be10-a525b1349b8c
 describe(test)
 
+# ╔═╡ 35deec1b-3cd2-4d7f-b9f4-73ad75d35aa0
+md"""
+### Inspect y label 
+"""
+
 # ╔═╡ 5b6ec448-09b1-47c2-8e45-39ad3506d253
 begin
 	@chain label begin
@@ -35,6 +41,18 @@ begin
 end
 
 
+# ╔═╡ c77bc993-959b-4080-933d-28cdde3da1fb
+md"""
+#### Univariate studio variable
+"""
+
+# ╔═╡ ce39fcc8-47d1-44e3-83b3-faa72c8f4fc7
+begin
+	float_df = select(train, findall(col -> eltype(col) <: Float64, eachcol(train)))
+	int_df = select(train, findall(col -> eltype(col) <: Int64, eachcol(train)))
+	string_df = select(train, Not(reduce(vcat,(names(float_df), names(int_df)))))
+end
+
 # ╔═╡ 693caadd-0459-46fa-bfe4-616607d4c49b
 begin
 	@chain train begin
@@ -42,6 +60,17 @@ begin
 		@summarize(n = nrow())
 		@arrange(desc(n))
 	end
+end
+
+# ╔═╡ 8512a371-5417-4cc4-a25a-56bbede0a398
+names(train)
+
+# ╔═╡ a4076b41-6a9b-4a2c-a425-86179de3f155
+begin
+	scatter(train.latitude,
+		train.longitude, 
+		markercolor = label.status_group
+	)
 end
 
 # ╔═╡ 47cfaefb-2fbd-4c6a-8ddf-5724181f961d
@@ -54,12 +83,14 @@ end
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
 Tidier = "f0413319-3358-4bb0-8e7c-0c83523a93bd"
 
 [compat]
 CSV = "~0.10.9"
+DataFrames = "~1.5.0"
 Plots = "~1.38.7"
 Tidier = "~0.5.0"
 """
@@ -70,7 +101,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.8.3"
 manifest_format = "2.0"
-project_hash = "b17750addc303431e661eebebd0d6504e848ada8"
+project_hash = "524e5ab1cd457e095cb42c681d63a78ba3af230f"
 
 [[deps.ArgTools]]
 uuid = "0dad84c5-d112-42e6-8d28-ef12dabb789f"
@@ -1100,8 +1131,13 @@ version = "1.4.1+0"
 # ╠═92e5479b-3e42-41b3-b77c-499d7e03a243
 # ╠═8f5709be-2983-49ab-a910-ab568f964b47
 # ╠═07a32f8b-0d2e-4010-be10-a525b1349b8c
+# ╠═35deec1b-3cd2-4d7f-b9f4-73ad75d35aa0
 # ╠═5b6ec448-09b1-47c2-8e45-39ad3506d253
+# ╟─c77bc993-959b-4080-933d-28cdde3da1fb
+# ╠═ce39fcc8-47d1-44e3-83b3-faa72c8f4fc7
 # ╠═693caadd-0459-46fa-bfe4-616607d4c49b
+# ╠═8512a371-5417-4cc4-a25a-56bbede0a398
+# ╠═a4076b41-6a9b-4a2c-a425-86179de3f155
 # ╠═47cfaefb-2fbd-4c6a-8ddf-5724181f961d
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
