@@ -65,14 +65,6 @@ end
 # ╔═╡ 8512a371-5417-4cc4-a25a-56bbede0a398
 names(train)
 
-# ╔═╡ a4076b41-6a9b-4a2c-a425-86179de3f155
-begin
-	scatter(train.latitude,
-		train.longitude, 
-		markercolor = label.status_group
-	)
-end
-
 # ╔═╡ 47cfaefb-2fbd-4c6a-8ddf-5724181f961d
 begin
 	scatter(train.latitude, train.longitude)
@@ -101,7 +93,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.8.3"
 manifest_format = "2.0"
-project_hash = "524e5ab1cd457e095cb42c681d63a78ba3af230f"
+project_hash = "0d2ff4bb5d1c20742fb1ba044959c6f8a4e11d28"
 
 [[deps.ArgTools]]
 uuid = "0dad84c5-d112-42e6-8d28-ef12dabb789f"
@@ -1137,7 +1129,6 @@ version = "1.4.1+0"
 # ╠═ce39fcc8-47d1-44e3-83b3-faa72c8f4fc7
 # ╠═693caadd-0459-46fa-bfe4-616607d4c49b
 # ╠═8512a371-5417-4cc4-a25a-56bbede0a398
-# ╠═a4076b41-6a9b-4a2c-a425-86179de3f155
 # ╠═47cfaefb-2fbd-4c6a-8ddf-5724181f961d
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
