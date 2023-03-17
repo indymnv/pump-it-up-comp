@@ -15,35 +15,18 @@ test = DataFrame(CSV.File("data/702ddfc5-68cd-4d1d-a0de-f5f566f76d91.csv"))
 #Simple description
 describe(test)
 
-function ValueCount(var_from_dataframe::Symbol)
-	@chain train begin
-		@group_by(:var_from_dataframe)
-		@summarize(n = nrow())
-		@arrange(desc(n))
-	end
+sort(combine(groupby(train, "funder"), nrow), :nrow)
+
+#To generate value counts
+function ValueCount(df , field)
+	sort(combine(groupby(df, field), nrow), :nrow)
 end
 
-@chain train begin
-	@select(amount_tsh)
-	@summarize(sum = sum(amount_tsh))
-end
 
 plot(train.amount_tsh)
 
 plot(train.funder)
 
-#Let's count founders
-@chain train begin
-	@group_by(funder)
-	@summarize(n = nrow())
-	@arrange(desc(n))
-end
-
-
-@chain train, label begin
-	@left_join(train, label)
-	@group_by(train.funder)
-end
 
 scatter(train.latitude, train.longitude)
 scatter!(test.latitude, test.longitude)
